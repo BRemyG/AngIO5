@@ -1,0 +1,30 @@
+<div>
+  <table class="w3-table w3-striped w3-border w3-bordered">
+    <div *ngIf="newData">
+      <tr>
+        <th>YEAR</th>
+        <th *ngFor="let m of month">{{m}}</th>
+        <th><i>total</i></th>
+      </tr>
+
+
+      <tr *ngFor="let data of newData; trackBy : trackyear">
+        <td><span><button class="w3-button w3-hover-red" (click)="deleteRow(data.Year)">&times;</button></span>{{data.Year}}</td>
+        <td *ngFor="let x of data.Value">{{x}}</td>
+        <td class="w3-text-green">{{data.total}}</td>
+
+      </tr>
+    </div>
+  </table>
+  <div>
+    <input #addYr type="number" placeholder="add a year" (change)='0' value="2018">
+    <select #addMo  (change)='0'>
+      <option  *ngFor="let m of month; let ind = index" value="{{ind + 1}}">{{m}}</option>
+    </select>
+    <input #addVal type="range" min="0" max="100" value="8"(change)='0'>
+    <button class="w3-button w3-round w3-blue" (click) ="addValue(addYr.value, addMo.value, addVal.value)" >Add</button>
+    <p>Year: {{addYr.value}}  Month: {{month[addMo.value-1]}} Value: {{addVal.value/100}}</p>
+    <p *ngIf="alert" class="w3-text-orange">{{alert}}</p>
+    <button class="w3-button w3-green w3-round" (click)="save()"> Save </button>
+  </div>
+</div>
